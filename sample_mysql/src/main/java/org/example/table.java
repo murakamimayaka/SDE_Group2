@@ -34,7 +34,7 @@ public class table extends Application{
 
     @Override
     public void start(Stage procedrue) throws Exception{
-        //定义表格的行标
+      
         TableView<Movie> table = new TableView();
         TableColumn movieid = new TableColumn("movieid");
         TableColumn moviename = new TableColumn("moviename");
@@ -43,7 +43,7 @@ public class table extends Application{
         TableColumn Price=new TableColumn("Price");
         TableColumn duration=new TableColumn("duration");
         
-        //表格列宽宽度设置
+      
         movieid.setMinWidth(100);
         moviename.setMinWidth(100);
         diretor.setMinWidth(100);
@@ -79,7 +79,7 @@ public class table extends Application{
 		cont = DriverManager.getConnection(url, user, pwd);
 		ppst = cont.createStatement();
 		rst = ppst.executeQuery(sql4);
-		//System.out.print("连接成功");
+		//System.out.print("connected");
 		while(rst.next()) {
 			data.add(new         
              Movie(rst.getInt(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getDouble(5),rst.getInt(6)));
