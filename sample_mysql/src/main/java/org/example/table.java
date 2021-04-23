@@ -5,27 +5,53 @@
  */
 package org.example;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
  *
  * @author llyxi
  */
-public class table extends Application{
+public class Table extends Application{
+    
+    @FXML
+    private TableColumn<Movie, Integer> movieid;
+
+    @FXML
+    private TableColumn<Movie, String> diretor;
+
+    @FXML
+    private TableColumn<Movie, String> mainActor;
+
+    @FXML
+    private TableColumn<Movie,Double> Price;
+
+    @FXML
+    private TableColumn<Movie,Integer> duration;
+
+        private static Scene scene;
         String url = "jdbc:mysql://localhost:3306/movie";/*your database location*/
-	String user = "";/*user name*/
-	String pwd = "";/*password*/
+	String user = "root";/*user name*/
+	String pwd = "nicai";/*password*/
 	String jdbc = "com.mysql.cj.jdbc.Driver";
 	ResultSet rst = null;
 	Connection cont = null;
@@ -50,7 +76,18 @@ public class table extends Application{
         mainActor.setMinWidth(100);
         Price.setMaxWidth(100);
         duration.setMaxWidth(100);
-        
+        table.setOnMousePressed(new EventHandler<MouseEvent>() {
+    @Override 
+    public void handle(MouseEvent event){
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+            try {                   
+                Table.setRoot("detail");
+            } catch (IOException ex) {
+                Logger.getLogger(Table.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+});
         movieid.setCellValueFactory(new PropertyValueFactory("movieid"));
         moviename.setCellValueFactory(new PropertyValueFactory("moviename"));
         diretor.setCellValueFactory(new PropertyValueFactory("diretor"));
@@ -61,10 +98,17 @@ public class table extends Application{
         date(table,movieid,moviename,diretor,mainActor,Price,duration);
         table.getColumns().addAll(movieid,moviename,diretor,mainActor,Price,duration);
  
-        Scene scene = new Scene(table,400, 200);
+        scene = new Scene(table,400, 200);
         procedrue.setTitle("Table View Sample");
         procedrue.setScene(scene);
         procedrue.show();
+    }
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Table.class.getResource("/org.example/"+fxml + ".fxml"));
+        return fxmlLoader.load();
     }
       public void date(TableView table,  TableColumn movieid,
 		TableColumn moviename, TableColumn diretor, TableColumn mainActor,TableColumn Price,TableColumn duration) {

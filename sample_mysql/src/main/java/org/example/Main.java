@@ -5,7 +5,10 @@
  */
 package org.example;
 
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 /**
  *
@@ -13,7 +16,6 @@ import javafx.application.Application;
  */
 public class Main {
     public static void main(String[] args) {
-        Application.launch(table.class);
+        Application.launch(Table.class);
     }
-    
 }
