@@ -1,0 +1,1 @@
+SELECT count(1) FROM user_account WHERE username = "ichigo" and password = "baba";
