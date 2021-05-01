@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.example.Table">
-  <columns>
-    <TableColumn fx:id="movieid" prefWidth="75.0" text="movieid" />
-    <TableColumn prefWidth="87.0" text="moviename" />
-      <TableColumn fx:id="diretor" prefWidth="87.0" text="diretor" />
-      <TableColumn fx:id="mainActor" prefWidth="87.0" text="mainActor" />
-      <TableColumn fx:id="Price" prefWidth="87.0" text="Price" />
-      <TableColumn fx:id="duration" prefWidth="87.0" text="duration" />
-  </columns>
-</TableView>
+
+<AnchorPane prefHeight="546.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Table">
+   <children>
+      <TableView fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="831.0">
+        <columns>
+          <TableColumn fx:id="movieid" prefWidth="75.0" text="movieid" />
+          <TableColumn fx:id="moviename" prefWidth="87.0" text="moviename" />
+            <TableColumn fx:id="diretor" prefWidth="87.0" text="diretor" />
+            <TableColumn fx:id="mainActor" prefWidth="87.0" text="mainActor" />
+            <TableColumn fx:id="Price" prefWidth="87.0" text="Price" />
+            <TableColumn fx:id="duration" prefWidth="87.0" text="duration" />
+            <TableColumn fx:id="image" prefWidth="75.0" text="image" visible="false" />
+        </columns>
+      </TableView>
+      <Button fx:id="logout" layoutX="6.0" layoutY="378.0" mnemonicParsing="false" onAction="#Logout" text="Logout" />
+   </children>
+</AnchorPane>
