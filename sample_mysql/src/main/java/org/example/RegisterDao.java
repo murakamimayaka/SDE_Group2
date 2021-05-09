@@ -34,9 +34,9 @@ public class RegisterDao {
             preparedStatement.setString(2, lastname);
             preparedStatement.setString(3, username);
             preparedStatement.setString(4, password);
-
+            preparedStatement.executeUpdate();
             System.out.println(preparedStatement);
-
+            
        
 
         } catch (SQLException e) {

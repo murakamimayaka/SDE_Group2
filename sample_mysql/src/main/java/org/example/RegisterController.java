@@ -58,15 +58,13 @@ public class RegisterController implements Initializable {
     }
     @FXML
     public void registerButtonOnAction(ActionEvent event) throws SQLException{
-       if (usernameTextField.getText().isEmpty()) {
-            
-            return;
-        }
+       
         if (setPasswordField.getText().isEmpty()) {
-            
+            System.out.println("asd");
             return;
         }
-       if(confirmPasswordField.getText()!=setPasswordField.getText()){
+       if(confirmPasswordField.getText() == null ? setPasswordField.getText() != null : !confirmPasswordField.getText().equals(setPasswordField.getText())){
+           System.out.println("no same");
        return;
        }
         String userId = usernameTextField.getText();
