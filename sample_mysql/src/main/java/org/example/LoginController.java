@@ -22,7 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import sample.DatabaseConnecton;
 
 public class LoginController implements Initializable {
     @FXML

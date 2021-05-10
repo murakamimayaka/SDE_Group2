@@ -125,7 +125,7 @@ public class Table implements Initializable{
 		System.out.print("连接成功");
 		while(rst.next()) {
 			data.add(new         
-             Movie(rst.getInt(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getDouble(5),rst.getInt(6),rst.getString(7)));
+             Movie(rst.getInt(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getDouble(5),rst.getDouble(6),rst.getString(7),rst.getInt(8),rst.getString(9),rst.getInt(10)));
 			
 			table.setItems(data);
 		}
