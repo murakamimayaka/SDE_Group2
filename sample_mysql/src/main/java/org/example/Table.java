@@ -15,21 +15,23 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
 
-import org.graalvm.compiler.phases.common.NodeCounterPhase.Stage;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import jdk.internal.org.jline.terminal.MouseEvent.Button;
 
 /**
  *
@@ -39,7 +41,7 @@ public class Table implements Initializable{
     @FXML
     public TableView table;
     @FXML
-    private TableColumn<Movie, Integer> movieid;
+    private TableColumn<Movie,Integer> movieid;
 
     @FXML
     private TableColumn<Movie, String> diretor;
