@@ -36,18 +36,19 @@ public class Detail implements Initializable{
     private Label duration;
     
     @FXML
-    private Button Buy;
-
+    private Button Confirm;
+    @FXML
+    private Label Check;
     @FXML
     private Button Back;
     @FXML
     void onBack(ActionEvent event) throws IOException {
-           Main.setRoot("Table");
+          
     }
 
     @FXML
-    void onBuy(ActionEvent event) {
-
+    void onConfirm(ActionEvent event) {
+Check.setText("your ticket was confirmed");
     }
     void initData(Movie a) {
     name.setText(a.getMoviename());

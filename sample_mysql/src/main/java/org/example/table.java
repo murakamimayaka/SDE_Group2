@@ -65,7 +65,7 @@ public class Table implements Initializable{
     private Button logout;
 
     @FXML
-    void Logout(ActionEvent event) {
+    void Logout(ActionEvent event) throws IOException {
           Main.setRoot("login");
     }
 

@@ -77,7 +77,7 @@ public class RegisterController implements Initializable {
     }
 
     @FXML
-    void closeButton(ActionEvent event) {
+    void closeButton(ActionEvent event) throws IOException {
         Main.setRoot("login");
     }
 
