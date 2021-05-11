@@ -5,70 +5,108 @@
  */
 package org.example;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javafx.application.Application;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.table.TableColumn;
+import javax.swing.text.TableView;
+
+import org.graalvm.compiler.phases.common.NodeCounterPhase.Stage;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import jdk.internal.org.jline.terminal.MouseEvent.Button;
 
 /**
  *
  * @author llyxi
  */
-public class table extends Application{
+public class Table implements Initializable{
+    @FXML
+    public TableView table;
+    @FXML
+    private TableColumn<Movie, Integer> movieid;
+
+    @FXML
+    private TableColumn<Movie, String> diretor;
+ @FXML
+    private TableColumn<Movie, String> moviename;
+
+    @FXML
+    private TableColumn<Movie, String> mainActor;
+
+    @FXML
+    private TableColumn<Movie,Double> Price;
+
+    @FXML
+    private TableColumn<Movie,Integer> duration;
+      @FXML
+    private TableColumn<Movie, String> image;
+      @FXML
+    private Button logout;
+
+    @FXML
+    void Logout(ActionEvent event) throws IOException {
+          Main.setRoot("login");
+    }
+
+       
         String url = "jdbc:mysql://localhost:3306/movie";/*your database location*/
-	String user = "";/*user name*/
-	String pwd = "";/*password*/
+	String user = "root";/*user name*/
+	String pwd = "nicai";/*password*/
 	String jdbc = "com.mysql.cj.jdbc.Driver";
 	ResultSet rst = null;
 	Connection cont = null;
 	Statement ppst = null;
 
 
-    @Override
-    public void start(Stage procedrue) throws Exception{
-      
-        TableView<Movie> table = new TableView();
-        TableColumn movieid = new TableColumn("movieid");
-        TableColumn moviename = new TableColumn("moviename");
-        TableColumn diretor = new TableColumn("diretor");
-        TableColumn mainActor = new TableColumn("mainActor");
-        TableColumn Price=new TableColumn("Price");
-        TableColumn duration=new TableColumn("duration");
+    
+    public void start() throws Exception{
+        
+       
+       
         
       
-        movieid.setMinWidth(100);
-        moviename.setMinWidth(100);
-        diretor.setMinWidth(100);
-        mainActor.setMinWidth(100);
-        Price.setMaxWidth(100);
-        duration.setMaxWidth(100);
-        
+       
         movieid.setCellValueFactory(new PropertyValueFactory("movieid"));
         moviename.setCellValueFactory(new PropertyValueFactory("moviename"));
         diretor.setCellValueFactory(new PropertyValueFactory("diretor"));
         mainActor.setCellValueFactory(new PropertyValueFactory("mainActor"));
         Price.setCellValueFactory(new PropertyValueFactory("Price"));
         duration.setCellValueFactory(new PropertyValueFactory("duration"));
-        
-        date(table,movieid,moviename,diretor,mainActor,Price,duration);
-        table.getColumns().addAll(movieid,moviename,diretor,mainActor,Price,duration);
- 
-        Scene scene = new Scene(table,400, 200);
-        procedrue.setTitle("Table View Sample");
-        procedrue.setScene(scene);
-        procedrue.show();
+        image.setCellValueFactory(new PropertyValueFactory("image"));
+         table.setOnMousePressed(new EventHandler<MouseEvent>() {
+    @Override 
+    public void handle(MouseEvent event){
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+            try {
+                showCustomerDialog((Movie) table.getSelectionModel().getSelectedItem());
+                System.out.println(table.getSelectionModel().getSelectedItem());
+              
+            } catch (IOException ex) {
+                Logger.getLogger(Table.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-      public void date(TableView table,  TableColumn movieid,
-		TableColumn moviename, TableColumn diretor, TableColumn mainActor,TableColumn Price,TableColumn duration) {
-	try {
+});
+       
+        
+        
+ try {
 		Class.forName(jdbc);
 	}catch(ClassNotFoundException e) {
 		e.printStackTrace();
@@ -82,7 +120,7 @@ public class table extends Application{
 		//System.out.print("connected");
 		while(rst.next()) {
 			data.add(new         
-             Movie(rst.getInt(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getDouble(5),rst.getInt(6)));
+             Movie(rst.getInt(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getDouble(5),rst.getDouble(6),rst.getString(7),rst.getInt(8),rst.getString(9),rst.getInt(10)));
 			
 			table.setItems(data);
 		}
@@ -99,10 +137,41 @@ public class table extends Application{
 			}
 		}
 	}
-  }
 
-
+    }
     
+      public Stage showCustomerDialog(Movie a) throws IOException {
+  FXMLLoader loader = new FXMLLoader(
+    getClass().getResource(
+      "/org.example/detail.fxml"
+    )
+  );
+
+  Stage stage = new Stage(StageStyle.DECORATED);
+  stage.setScene(
+    new Scene(loader.load())
+  );
+
+  Detail controller = loader.getController();
+  controller.initData(a);
+
+  stage.show();
+
+  return stage;
+}
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+          
+            start();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Table.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+   
   
 
 }
