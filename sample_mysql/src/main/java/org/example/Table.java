@@ -53,11 +53,16 @@ public class Table implements Initializable{
 
     @FXML
     private TableColumn<Movie,Double> Price;
-
+ @FXML
+    private TableColumn<Movie, Double> Discount;
+ @FXML
+    private TableColumn<Movie, String> Start;
     @FXML
     private TableColumn<Movie,Integer> duration;
       @FXML
     private TableColumn<Movie, String> image;
+      @FXML
+    private TableColumn<Movie, Integer> Hall;
       @FXML
     private Button logout;
 
@@ -89,6 +94,9 @@ public class Table implements Initializable{
         diretor.setCellValueFactory(new PropertyValueFactory("diretor"));
         mainActor.setCellValueFactory(new PropertyValueFactory("mainActor"));
         Price.setCellValueFactory(new PropertyValueFactory("Price"));
+        Discount.setCellValueFactory(new PropertyValueFactory("Discount"));
+        Start.setCellValueFactory(new PropertyValueFactory("Start"));
+        Hall.setCellValueFactory(new PropertyValueFactory("Hall"));
         duration.setCellValueFactory(new PropertyValueFactory("duration"));
         image.setCellValueFactory(new PropertyValueFactory("image"));
          table.setOnMousePressed(new EventHandler<MouseEvent>() {
